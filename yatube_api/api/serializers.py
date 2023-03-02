@@ -1,17 +1,18 @@
-from rest_framework import serializers
 from rest_framework.relations import SlugRelatedField
+from rest_framework.serializers import (CurrentUserDefault, ModelSerializer,
+                                        SlugRelatedField, ValidationError)
+from rest_framework.validators import UniqueTogetherValidator
+
+from posts.models import Comment, Follow, Group, Post, User
 
 
-from posts.models import Group, Comment, Post, Follow
-
-
-class GroupSerializer(serializers.ModelSerializer):
+class GroupSerializer(ModelSerializer):
     class Meta:
         fields = '__all__'
         model = Group
 
 
-class PostSerializer(serializers.ModelSerializer):
+class PostSerializer(ModelSerializer):
     author = SlugRelatedField(slug_field='username', read_only=True)
 
     class Meta:
@@ -19,8 +20,8 @@ class PostSerializer(serializers.ModelSerializer):
         model = Post
 
 
-class CommentSerializer(serializers.ModelSerializer):
-    author = serializers.SlugRelatedField(
+class CommentSerializer(ModelSerializer):
+    author = SlugRelatedField(
         read_only=True, slug_field='username'
     )
 
@@ -30,7 +31,28 @@ class CommentSerializer(serializers.ModelSerializer):
         read_only_fields = ('post',)
 
 
-class FollowSerializer(serializers.ModelSerializer):
+class FollowSerializer(ModelSerializer):
+    user = SlugRelatedField(
+        read_only=True, slug_field='username',
+        default=CurrentUserDefault()
+    )
+    following = SlugRelatedField(
+        slug_field='username', queryset=User.objects.all()
+    )
+
     class Meta:
         fields = '__all__'
         model = Follow
+        validators = (
+            UniqueTogetherValidator(
+                queryset=Follow.objects.all(),
+                fields=('user', 'following')
+            ),
+        )
+
+    def validate(self, data):
+        user = self.context['request'].user
+        if user == data['following']:
+            raise ValidationError(
+                'Невозможно оформить подписку на самого себя!')
+        return data
