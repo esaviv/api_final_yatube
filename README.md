@@ -80,8 +80,12 @@ python3 manage.py runserver
   "group": 0
 }
 ```
+
 Получение публикаций
+```
 /api/v1/posts/
+```
+```
 {
   "count": 123,
   "next": "http://api.example.org/accounts/?offset=400&limit=100",
@@ -97,9 +101,13 @@ python3 manage.py runserver
     }
   ]
 }
+```
 
 Получение публикации
+```
 /api/v1/posts/{id}/
+```
+```
 {
   "id": 0,
   "author": "string",
@@ -108,13 +116,19 @@ python3 manage.py runserver
   "image": "string",
   "group": 0
 }
+```
 
 
 Добавление комментария
+```
 /api/v1/posts/{post_id}/comments/
+```
+```
 {
   "text": "string"
 }
+```
+```
 {
   "id": 0,
   "author": "string",
@@ -122,9 +136,13 @@ python3 manage.py runserver
   "created": "2019-08-24T14:15:22Z",
   "post": 0
 }
+```
 
 Получение комментариев
+```
 /api/v1/posts/{post_id}/comments/
+```
+```
 [
   {
     "id": 0,
@@ -134,9 +152,13 @@ python3 manage.py runserver
     "post": 0
   }
 ]
+```
 
 Получение комментария
+```
 /api/v1/posts/{post_id}/comments/{id}/
+```
+```
 {
   "id": 0,
   "author": "string",
@@ -144,9 +166,13 @@ python3 manage.py runserver
   "created": "2019-08-24T14:15:22Z",
   "post": 0
 }
+```
 
 Список сообществ
+```
 /api/v1/groups/
+```
+```
 [
   {
     "id": 0,
@@ -155,12 +181,17 @@ python3 manage.py runserver
     "description": "string"
   }
 ]
+```
 
 Подписка
+```
 /api/v1/follow/
+```
+```
 {
   "following": "string"
 }
+```
 
 
 Подписки
