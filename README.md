@@ -1,4 +1,4 @@
-### Как запустить проект:
+## Как запустить проект:
 
 Клонировать репозиторий и перейти в него в командной строке:
 
@@ -42,8 +42,11 @@ python3 manage.py migrate
 python3 manage.py runserver
 ```
 
-Получить JWT-токен
 
+## Примеры запросов и ответов:
+
+### Получить JWT-токен
+#### POST
 ```
 /api/v1/jwt/create/
 ```
@@ -53,13 +56,17 @@ python3 manage.py runserver
   "following": "string"
 }
 ```
+Ответ:
 ```
 {
   "refresh": "string",
   "access": "string"
 }
 ```
-Создание публикации
+
+
+### Создание публикации
+#### POST
 ```
 /api/v1/posts/
 ```
@@ -70,6 +77,7 @@ python3 manage.py runserver
   "group": 0
 }
 ```
+Ответ:
 ```
 {
   "id": 0,
@@ -81,10 +89,12 @@ python3 manage.py runserver
 }
 ```
 
-Получение публикаций
+### Получение публикаций
+#### GET
 ```
 /api/v1/posts/
 ```
+Ответ:
 ```
 {
   "count": 123,
@@ -103,10 +113,12 @@ python3 manage.py runserver
 }
 ```
 
-Получение публикации
+### Получение публикации
+#### GET
 ```
 /api/v1/posts/{id}/
 ```
+Ответ:
 ```
 {
   "id": 0,
@@ -119,7 +131,8 @@ python3 manage.py runserver
 ```
 
 
-Добавление комментария
+### Добавление комментария
+#### POST
 ```
 /api/v1/posts/{post_id}/comments/
 ```
@@ -128,6 +141,7 @@ python3 manage.py runserver
   "text": "string"
 }
 ```
+Ответ:
 ```
 {
   "id": 0,
@@ -138,10 +152,12 @@ python3 manage.py runserver
 }
 ```
 
-Получение комментариев
+### Получение комментариев
+#### GET
 ```
 /api/v1/posts/{post_id}/comments/
 ```
+Ответ:
 ```
 [
   {
@@ -154,10 +170,12 @@ python3 manage.py runserver
 ]
 ```
 
-Получение комментария
+### Получение комментария
+#### GET
 ```
 /api/v1/posts/{post_id}/comments/{id}/
 ```
+Ответ:
 ```
 {
   "id": 0,
@@ -168,10 +186,13 @@ python3 manage.py runserver
 }
 ```
 
-Список сообществ
+
+### Список сообществ
+#### GET
 ```
 /api/v1/groups/
 ```
+Ответ:
 ```
 [
   {
@@ -183,22 +204,30 @@ python3 manage.py runserver
 ]
 ```
 
-Подписка
+
+### Подписка
+#### POST
 ```
 /api/v1/follow/
 ```
+Ответ:
 ```
 {
   "following": "string"
 }
 ```
 
-
-Подписки
+### Подписки
+#### GET
+```
 /api/v1/follow/
+```
+Ответ:
+```
 [
   {
     "user": "string",
     "following": "string"
   }
 ]
+```
