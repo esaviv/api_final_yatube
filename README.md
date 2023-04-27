@@ -37,7 +37,7 @@ pip install -r requirements.txt
 ```
 python3 yatube_api/manage.py migrate | python yatube_api/manage.py migrate
 ```
-Запусти
+Запустить проект:
 ```
 python3 yatube_api/manage.py runserver | python yatube_api/manage.py runserver
 ```
